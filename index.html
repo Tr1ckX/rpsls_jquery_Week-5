@@ -69,8 +69,12 @@
           sam.picks($(this).data('pick'));
 
           tony.random_pick(Object.keys(game.PAIRS));
+          $('[data-pick=' + tony.pick + ']').css("width", "10%");
         //  $('.choices').data(tony.pick).css({"color":"green"});
           $('#results').append('<li>' + game.winningMessage() + '</li>');
+          
+        // $('[data-pick=' + tony.pick + ']').css("width", "15%");
+
         });
       });
     </script>
