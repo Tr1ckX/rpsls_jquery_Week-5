@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Load the Paper.js library -->
+<script type="text/javascript" src="lib/paper.js"></script>
+<!-- Define inlined PaperScript associate it with myCanvas -->
+<script type="text/paperscript" canvas="myCanvas">
+  // Create a Paper.js Path to draw a line into it:
+  var path = new Path();
+  // Give the stroke a color
+  path.strokeColor = 'black';
+  var start = new Point(100, 100);
+  // Move to start and draw a line from there
+  path.moveTo(start);
+  // Note the plus operator on Point objects.
+  // PaperScript does that for us, and much more!
+  path.lineTo(start + [ 100, -50 ]);
+  var rect = new Rectangle(10, 20, 200, 100);
+var y = view.size.height / 2;
+var width = view.size.width;
+var vector = new Point({
+  angle: 45,
+  length: width / 5
+});
+var offset = width / 30;
+var handleTexts = [];
+var path = new Path();
+path.segments = [
+  [[offset, y], null, vector.rotate(-90)],
+  [[width / 2, y], vector.rotate(-180), vector],
+  [[width - offset, y], vector.rotate(90), null]
+];
+path.fullySelected = true;
+
+function onMouseMove(event) {
+  var point = event.point.clone();
+  // Constrain the event point, to not cut off the text:
+  if (point.y < 22)
+    point.y = 22;
+  if (point.y > view.size.height - 24)
+    point.y = view.size.height - 24;
+  var delta = point - view.center;
+  for (var i = 0; i < 2; i++) {
+    var curve = path.curves[i];
+    curve.handle1.y = curve.handle2.y = delta.y * (i % 2 ? 1 : -1);
+    var firstPoint = curve.point1 + curve.handle1;
+    var secondPoint = curve.point2 + curve.handle2;
+    handleTexts[i * 2].point = secondPoint -
+        (firstPoint.y < y ? [0, 10] : [0, -18]);
+    handleTexts[i * 2 + 1].point = firstPoint -
+        (firstPoint.y < y ? [0, 10] : [0, -18]);
+  }
+}
+
+project.currentStyle.fillColor = 'black';
+for (var i = 0; i < 3; i++) {
+  var segment = path.segments[i];
+  var text = new PointText({
+    point: segment.point - [0, 10],
+    content: i,
+    justification: 'center'
+  });
+}
+
+for (var i = 0; i < 2; i++) {
+  handleTexts.push(
+    new PointText({
+      content: 'handleIn',
+      justification: 'center'
+    }),
+    new PointText({
+      content: 'handleOut',
+      justification: 'center'
+    })
+  );
+}
+
+// Call onMouseMove once to correctly position the text items:
+onMouseMove({ point: view.center - vector.rotate(-90) });
+</script>
+</head>
+<body>
+  <canvas id="myCanvas" resize></canvas>
+</body>
+</html>

@@ -43,24 +43,26 @@
   </head>
   <body>
     <h1>Rock Paper Scissors Lizard Spock</h1>
-    <div id="page">
+   
 
-      <div id="choiceCarousel">
-        <div class="previous arrow"></div>
-        <div class="next arrow"></div>
+        <svg version="1.1"
+     baseProfile="full"
+     width="500" height="400"
+     xmlns="http://www.w3.org/2000/svg">
 
-        <div id="stage">
+  <rect width="100%" height="100%" fill="grey" />
 
-          <img id="rock" class="default" src="images/rock.png" width="120" height="120" alt="rock" data-pick='rock' />
-          <img id="paper" class="default" src="images/paper.png" width="120" height="120" alt="paper" data-pick='paper' />
-          <img id="scissors" class="default" src="images/scissors.png" width="120" height="120" alt="scissors" data-pick='scissors'/>
-          <img id="lizard" class="default" src="images/lizard.png" width="120" height="120" alt="lizard" data-pick='lizard'/>
-          <img id="spock" class="default" src="images/spock.png" width="120" height="120" alt="spock" data-pick='spock'/>
 
-        </div>
-      </div>
+  <text id='rock' x="200" y="30" font-size="30" text-anchor="middle" fill="white" data-pick='rock'>Rock</text>
 
-    </div>
+  <text id = 'paper' x="100" y="150" font-size="30" text-anchor="middle" fill="white" data-pick='paper'>Paper</text>
+  <text x="260" y="150" font-size="30" text-anchor="middle" fill="white" data-pick='scissors'>Scissors</text>
+  <text x="120" y="250" font-size="30" text-anchor="middle" fill="white" data-pick='lizard'>Lizard</text>
+  <text x="230" y="250" font-size="30" text-anchor="middle" fill="white" data-pick='spock'>Spock</text>
+
+
+</svg>
+     
       <ul id="results">
       </ul>
 
@@ -79,6 +81,12 @@
 
           $('#results').prepend('<li>' + game.winningMessage() + '</li>');
           $('li:nth-child(9)').remove();
+          $('text#rock').click(function() {
+              alert('hello');        
+          });
+          $("paper").click(function() {
+              alert($(this).attr("id"));        
+          });
 
         });
       });
