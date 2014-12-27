@@ -15,4 +15,4 @@ Entering to the world of Javascript.
   - 
   
 
-You can try it [here](rock-paper-spock.herokuapp.com)
+You can try it [here](http://rock-paper-spock.herokuapp.com)
