@@ -17,3 +17,5 @@ The Javascript week continous.
   
 
 You can try it [here](http://rock-paper-spock.herokuapp.com)
+
+You can find this week's other project [here](https://github.com/Tr1ckX/RPS_Javascript_Week-5) and the challenge [here](https://github.com/Tr1ckX/Bowling_Score_Week-5)
